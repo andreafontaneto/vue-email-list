@@ -11,6 +11,10 @@
 
   <div id="app">
 
+    <h2 v-if="isLoading === true">LOADING...</h2>
+
+    <h2 v-if="httpError === true">ERROR!</h2>
+    
     <ul>
       <li v-for="mail in mailArray">{{ mail }}</li>
     </ul>

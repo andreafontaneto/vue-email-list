@@ -22,18 +22,25 @@ const app = new Vue({
   data: {
 
     randomMail: '',
-    mailArray: []
+    mailArray: [],
+    isLoading: true,
+    httpError: false
 
   },
 
   method: {
 
+
   },
 
   mounted(){
 
-    for(let i = 0; i < 10; i++){
+    this.isLoading = true;
+    this.mailArray = [];
+    this.httpError= false;
 
+    for(let i = 0; i < 10; i++){
+  
       axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
       .then((response) => {
   
@@ -47,16 +54,28 @@ const app = new Vue({
         
         this.randomMail = data.response;
         console.log('const randomMail --->',this.randomMail);
-
+  
         this.mailArray.push(this.randomMail);
+  
+        if(this.mailArray.length === 10){
+          this.isLoading = false;
+        }
         
       })
-      .catch(() => {
+
+      .catch((error) => {
+
+        console.log('error --->',error);
+        this.httpError = true;
+
+        if(this.httpError === true){
+          this.isLoading = false;
+        }
   
       })
       
     }
-
+  
     //console.log('array con le email --->',this.mailArray);
 
   }
