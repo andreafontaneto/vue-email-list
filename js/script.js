@@ -21,6 +21,8 @@ const app = new Vue({
 
   data: {
 
+    randomMail: ''
+
   },
 
   method: {
@@ -29,7 +31,24 @@ const app = new Vue({
 
   mounted(){
 
-    console.log(axios);
+    axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
+    .then((response) => {
+      
+      console.log('response --->',response);
+      console.log('response.data --->',response.data);
+
+      const data = response.data;
+      console.log('const data --->',data);
+
+      console.log('data.response --->',data.response);
+      
+      this.randomMail = data.response;
+      console.log('const randomMail --->',this.randomMail);
+      
+    })
+    .catch(() => {
+
+    })
 
   }
 
