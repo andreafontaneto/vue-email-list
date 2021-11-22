@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
   <title>VUE Email List</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 
     <h2 v-if="isLoading === true">LOADING...</h2>
 
-    <h2 v-if="httpError === true">ERROR!</h2>
+    <h2 v-cloak v-if="httpError === true">ERROR!</h2>
     
     <ul>
       <li v-for="mail in mailArray">{{ mail }}</li>
