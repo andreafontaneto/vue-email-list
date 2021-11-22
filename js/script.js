@@ -21,7 +21,8 @@ const app = new Vue({
 
   data: {
 
-    randomMail: ''
+    randomMail: '',
+    mailArray: []
 
   },
 
@@ -31,24 +32,32 @@ const app = new Vue({
 
   mounted(){
 
-    axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
-    .then((response) => {
-      
-      console.log('response --->',response);
-      console.log('response.data --->',response.data);
+    for(let i = 0; i < 11; i++){
 
-      const data = response.data;
-      console.log('const data --->',data);
+      axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
+      .then((response) => {
+  
+        //console.log('response --->',response);
+        //console.log('response.data --->',response.data);
+  
+        const data = response.data;
+        //console.log('const data --->',data);
+  
+        //console.log('data.response --->',data.response);
+        
+        this.randomMail = data.response;
+        console.log('const randomMail --->',this.randomMail);
 
-      console.log('data.response --->',data.response);
+        this.mailArray.push(this.randomMail);
+        
+      })
+      .catch(() => {
+  
+      })
       
-      this.randomMail = data.response;
-      console.log('const randomMail --->',this.randomMail);
-      
-    })
-    .catch(() => {
+    }
 
-    })
+    //console.log('array con le email --->',this.mailArray);
 
   }
 
